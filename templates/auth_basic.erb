@@ -1,0 +1,7 @@
+<Location /<%= @location -%>>
+  AuthType Basic
+  AuthName "Restricted Files"
+  AuthBasicProvider file
+  AuthUserFile <%= @tpasswd_file %>
+  Require user <%= @user %>
+</Location>
