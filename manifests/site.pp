@@ -16,10 +16,10 @@ define apache2::site (
 
   if $source {
     if $source =~ /(.*)\/([^\/]*\.vhost)(\.erb)?/ {
-      $source_path      = $::1
-      $source_file      = $::2
-      $source_extension = $::3
-      $site_name        = $::2
+      $source_path      = $1
+      $source_file      = $2
+      $source_extension = $3
+      $site_name        = $2
     }
 
     file {"${name}_vhost_conf":
