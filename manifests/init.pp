@@ -1,4 +1,9 @@
-class apache2 () inherits apache2::params {
+class apache2 (
+
+  $fmp_host = apache2::params::fmp_host,
+  $fmp_port = apache2::params::fmp_port
+
+) inherits apache2::params {
 
   anchor {'apache2::begin':
     before => Class['apache2::install']

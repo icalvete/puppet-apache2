@@ -57,4 +57,13 @@ class apache2::config {
       'set /files/etc/apache2/apache2.conf/directive[6]/arg 2',
     ]
   }
+
+  file {'fpm_config':
+    ensure  => present,
+    path    => '/etc/apache2/conf.d/fpm',
+    content => template("${module_name}/fpm.erb"),
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0644',
+  }
 }
