@@ -6,13 +6,30 @@ class apache2::params {
   case $::operatingsystem {
 
     /^(Debian|Ubuntu)$/: {
-      $apache2_package    = 'apache2-mpm-worker'
-      $apache2_service    = 'apache2'
-      $apache2_config_dir = '/etc/apache2/'
-      $apache2_enmods     = "${apache2_config_dir}/mods-enabled/"
-      $apache2_ensites    = "${apache2_config_dir}/sites-enabled/"
-      $apache2_avmods     = "${apache2_config_dir}/mods-available/"
-      $apache2_avsites    = "${apache2_config_dir}/sites-available/"
+      $package    = 'apache2-mpm-worker'
+      $service    = 'apache2'
+      $config_dir = '/etc/apache2'
+      $enmods     = "${config_dir}/mods-enabled"
+      $ensites    = "${config_dir}/sites-enabled"
+      $avmods     = "${config_dir}/mods-available"
+      $avsites    = "${config_dir}/sites-available"
+
+      case $::operatingsystemrelease {
+
+        '12.04': {
+          $enconf = "${config_dir}/conf.d"
+          $sec    = 'security'
+        }
+        '13.04': {
+          $enconf = "${config_dir}/conf.d"
+          $sec    = 'security'
+        }
+        '13.10': {
+          $enconf = "${config_dir}/conf-enabled"
+          $sec    = 'security.conf'
+        }
+        default: {}
+      }
     }
     default: {
       fail ("${::operatingsystem} not supported.")

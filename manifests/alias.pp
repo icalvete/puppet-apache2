@@ -15,24 +15,24 @@ define apache2::alias (
     'present' : {
       file {"${name}_file":
         ensure  => present,
-        path    => "/etc/apache2/conf.d/${name}",
+        path    => "${apache2::params::enconf}/${name}.conf",
         content => $content,
         owner   => 'root',
         group   => 'root',
         mode    => '0644',
-        require => Package[$apache2::params::apache2_package],
+        require => Package[$apache2::params::package],
         notify  => Class['apache2::service'],
       }
     }
     'absent': {
       file {"${name}_file":
         ensure  => present,
-        path    => "/etc/apache2/conf.d/${name}",
+        path    => "${apache2::params::enconf}/${name}.conf",
         content => '',
         owner   => 'root',
         group   => 'root',
         mode    => '0644',
-        require => Package[$apache2::params::apache2_package],
+        require => Package[$apache2::params::package],
         notify  => Class['apache2::service'],
       }
     }

@@ -19,7 +19,7 @@ define apache2::module (
       exec { "active_module_$name":
         command => "/usr/sbin/a2enmod $name",
         unless  => "/usr/sbin/apachectl -t -D DUMP_MODULES | grep $name",
-        require => Package[$apache2::params::apache2_package],
+        require => Package[$apache2::params::package],
         notify  => Class['apache2::service'],
       }
     }
@@ -27,7 +27,7 @@ define apache2::module (
       exec { "deactive_module_$name":
         command => "/usr/sbin/a2dismod $name",
         onlyif  => "/usr/sbin/apachectl -t -D DUMP_MODULES | grep $name",
-        require => Package[$apache2::params::apache2_package],
+        require => Package[$apache2::params::package],
         notify  => Class['apache2::service'],
       }
     }

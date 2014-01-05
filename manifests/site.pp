@@ -11,11 +11,11 @@ define apache2::site (
     include $include_from_source
   }
 
-  $apache2_ensites = $apache2::params::apache2_ensites
-  $apache2_avsites = $apache2::params::apache2_avsites
+  $ensites = $apache2::params::ensites
+  $avsites = $apache2::params::avsites
 
   if $source {
-    if $source =~ /(.*)\/([^\/]*\.vhost)(\.erb)?/ {
+    if $source =~ /(.*)\/([^\/]*\.vhost.conf)(\.erb)?/ {
       $source_path      = $1
       $source_file      = $2
       $source_extension = $3
@@ -24,7 +24,7 @@ define apache2::site (
 
     file {"${name}_vhost_conf":
       ensure  => present,
-      path    => "${apache2_avsites}/${source_file}",
+      path    => "${avsites}/${source_file}",
       owner   => 'www-data',
       group   => 'root',
       mode    => '0664',
@@ -38,16 +38,16 @@ define apache2::site (
     'present' : {
       exec { "active_site_$name":
         command => "/usr/sbin/a2ensite ${site_name}",
-        unless  => "/usr/bin/test -h ${apache2_ensites}/${site_name}",
-        require => Package[$apache2::params::apache2_package],
+        unless  => "/usr/bin/test -h ${ensites}/${site_name}",
+        require => Package[$apache2::params::package],
         notify  => Class['apache2::service'],
       }
     }
     'absent': {
       exec { "deactive_site_$name":
         command => "/usr/sbin/a2dissite ${site_name}",
-        onlyif  => "/usr/bin/test -h ${apache2_ensites}/${site_name}",
-        require => Package[$apache2::params::apache2_package],
+        onlyif  => "/usr/bin/test -h ${ensites}/${site_name}",
+        require => Package[$apache2::params::package],
         notify  => Class['apache2::service'],
       }
     }
