@@ -15,7 +15,7 @@ class apache2::config {
   file {'apache_env':
     ensure => present,
     path   => "${apache2::params::enconf}/env.conf",
-    source => "puppet:///modules/${module_name}/apache_env",
+    content => template("${module_name}/env.erb"),
   }
 
   file {'apache_ports':
