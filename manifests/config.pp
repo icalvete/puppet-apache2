@@ -13,8 +13,8 @@ class apache2::config {
   }
 
   file {'apache_env':
-    ensure => present,
-    path   => "${apache2::params::enconf}/env.conf",
+    ensure  => present,
+    path    => "${apache2::params::enconf}/env.conf",
     content => template("${module_name}/env.erb"),
   }
 
@@ -40,9 +40,9 @@ class apache2::config {
     lens    => 'Httpd.lns',
     changes => [
       "set /files${apache2::params::config_dir}/apache2.conf/directive[last()+1] ServerName",
-      "set /files${apache2::params::config_dir}/apache2.conf/directive[last()]/arg $::fqdn",
+      "set /files${apache2::params::config_dir}/apache2.conf/directive[last()]/arg $::hostname",
     ],
-    onlyif => "match directive[. = 'ServerName'] size == 0",
+    onlyif  => "match directive[. = 'ServerName'] size == 0",
   }
 
   augeas{'apache_performance':
@@ -60,7 +60,7 @@ class apache2::config {
 
   file {'fpm_config':
     ensure  => present,
-    path   => "${apache2::params::enconf}/fpm.conf",
+    path    => "${apache2::params::enconf}/fpm.conf",
     content => template("${module_name}/fpm.erb"),
     owner   => 'root',
     group   => 'root',
