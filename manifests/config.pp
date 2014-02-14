@@ -66,4 +66,13 @@ class apache2::config {
     group   => 'root',
     mode    => '0644',
   }
+
+  if $apache2::params::environment == 'DES' {
+
+    file {'vagrant_vhost':
+      ensure  => present,
+      path    => "${apache2::params::enconf}/vagrant.vhost",
+      content => template("${module_name}/vagrant.vhost.erb"),
+    }
+  }
 }
