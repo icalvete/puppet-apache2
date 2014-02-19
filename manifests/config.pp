@@ -71,7 +71,7 @@ class apache2::config {
 
     file {'vagrant_vhost':
       ensure  => present,
-      path    => "${apache2::params::enconf}/vagrant.vhost",
+      path    => "${apache2::params::ensites}/vagrant.vhost",
       content => template("${module_name}/vagrant.vhost.erb"),
     }
   }
