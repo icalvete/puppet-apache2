@@ -12,6 +12,10 @@ class apache2::config {
     ensure => present
   }
 
+  apache2::module {'rewrite':
+    ensure => present
+  }
+
   file {'apache_env':
     ensure  => present,
     path    => "${apache2::params::enconf}/env.conf",
@@ -71,8 +75,8 @@ class apache2::config {
 
     file {'vagrant_vhost':
       ensure  => present,
-      path    => "${apache2::params::ensites}/vagrant.vhost",
-      content => template("${module_name}/vagrant.vhost.erb"),
+      path    => "${apache2::params::ensites}/vagrant.vhost.conf",
+      content => template("${module_name}/vagrant.vhost.conf.erb"),
     }
   }
 }
