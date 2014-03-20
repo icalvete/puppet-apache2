@@ -12,10 +12,14 @@ class apache2::config {
     ensure => present
   }
 
+  apache2::module {'rewrite':
+    ensure => present
+  }
+
   file {'apache_env':
-    ensure => present,
-    path   => "${apache2::params::enconf}/env.conf",
-    source => "puppet:///modules/${module_name}/apache_env",
+    ensure  => present,
+    path    => "${apache2::params::enconf}/env.conf",
+    content => template("${module_name}/env.erb"),
   }
 
   file {'apache_ports':
@@ -40,9 +44,9 @@ class apache2::config {
     lens    => 'Httpd.lns',
     changes => [
       "set /files${apache2::params::config_dir}/apache2.conf/directive[last()+1] ServerName",
-      "set /files${apache2::params::config_dir}/apache2.conf/directive[last()]/arg $::fqdn",
+      "set /files${apache2::params::config_dir}/apache2.conf/directive[last()]/arg $::hostname",
     ],
-    onlyif => "match directive[. = 'ServerName'] size == 0",
+    onlyif  => "match directive[. = 'ServerName'] size == 0",
   }
 
   augeas{'apache_performance':
@@ -60,10 +64,19 @@ class apache2::config {
 
   file {'fpm_config':
     ensure  => present,
-    path   => "${apache2::params::enconf}/fpm.conf",
+    path    => "${apache2::params::enconf}/fpm.conf",
     content => template("${module_name}/fpm.erb"),
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
+  }
+
+  if $apache2::params::environment == 'DES' {
+
+    file {'vagrant_vhost':
+      ensure  => present,
+      path    => "${apache2::params::ensites}/vagrant.vhost.conf",
+      content => template("${module_name}/vagrant.vhost.conf.erb"),
+    }
   }
 }
