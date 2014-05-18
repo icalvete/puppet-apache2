@@ -2,11 +2,11 @@ class apache2::params {
 
   $fpm_host = '127.0.0.1'
   $fpm_port = '9000'
-  $environment = hiera('environment')
+  $environment = $::environment
 
-  case $::operatingsystem {
+  case $::osfamily {
 
-    /^(Debian|Ubuntu)$/: {
+    /^Debian$/: {
       $package    = 'apache2-mpm-worker'
       $service    = 'apache2'
       $config_dir = '/etc/apache2'
@@ -17,19 +17,14 @@ class apache2::params {
 
       case $::operatingsystemrelease {
 
-        '12.04': {
+        /^(12.04|12.10|13.04)$/: {
           $enconf = "${config_dir}/conf.d"
           $sec    = 'security'
         }
-        '13.04': {
-          $enconf = "${config_dir}/conf.d"
-          $sec    = 'security'
-        }
-        '13.10': {
+        default: {
           $enconf = "${config_dir}/conf-enabled"
           $sec    = 'security.conf'
         }
-        default: {}
       }
     }
     default: {
