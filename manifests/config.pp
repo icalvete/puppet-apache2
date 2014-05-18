@@ -28,6 +28,12 @@ class apache2::config {
     source => "puppet:///modules/${module_name}/ports.conf",
   }
 
+  file {'combined_sp':
+    ensure => present,
+    path   => "${apache2::params::enconf}/combined_sp.conf",
+    source => "puppet:///modules/${module_name}/combined_sp.conf",
+  }
+
   augeas{'apache_security':
     incl    => "${apache2::params::enconf}/${apache2::params::sec}",
     lens    => 'Httpd.lns',
