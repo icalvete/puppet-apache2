@@ -3,7 +3,7 @@
   Action php5-fcgi /php5-fcgi
   Alias /php5-fcgi /usr/lib/cgi-bin/php5-fcgi
   FastCgiExternalServer /usr/lib/cgi-bin/php5-fcgi -host <%= scope.lookupvar('apache2::fpm_host') -%>:<%= scope.lookupvar('apache2::fpm_port') -%> -pass-header Authorization
-<% if @osfamily == 'Debian' and @operatingsystemrelease == '13.10' -%>
+<% if @apache26 -%>
 
   <Directory />
     Require all granted
