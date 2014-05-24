@@ -61,6 +61,8 @@ class apache2::config {
     changes => [
       "set /files${apache2::params::config_dir}/apache2.conf/directive[3] Timeout",
       "set /files${apache2::params::config_dir}/apache2.conf/directive[3]/arg 30",
+      "set /files${apache2::params::config_dir}/apache2.conf/directive[4] KeepAlive",
+      "set /files${apache2::params::config_dir}/apache2.conf/directive[4]/arg Off",
       "set /files${apache2::params::config_dir}/apache2.conf/directive[5] MaxKeepAliveRequests",
       "set /files${apache2::params::config_dir}/apache2.conf/directive[5]/arg 60",
       "set /files${apache2::params::config_dir}/apache2.conf/directive[6] KeepAliveTimeout",
