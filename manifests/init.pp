@@ -2,7 +2,7 @@ class apache2 (
 
   $fmp_host    = $apache2::params::fmp_host,
   $fmp_port    = $apache2::params::fmp_port,
-  $environment = $apache2::params::environment
+  $environment = $apache2::params::undef
 
 ) inherits apache2::params {
 

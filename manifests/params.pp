@@ -1,8 +1,8 @@
 class apache2::params {
 
-  $fpm_host = '127.0.0.1'
-  $fpm_port = '9000'
-  $environment = $::environment
+  $fpm_host    = '127.0.0.1'
+  $fpm_port    = '9000'
+  $environment = hiera('environment')
 
   case $::osfamily {
 
