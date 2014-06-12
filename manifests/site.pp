@@ -2,10 +2,17 @@ define apache2::site (
 
   $ensure              = 'present',
   $source              = undef,
-  $include_from_source = undef
+  $include_from_source = undef,
+  $server_alias        = ['server_alias']
 
 ) {
   include apache2
+
+  if $server_alias {
+    if ! is_array($server_alias) {
+      fail('server_alias parameter must be un array')
+    }
+  }
 
   if $include_from_source {
     include $include_from_source
