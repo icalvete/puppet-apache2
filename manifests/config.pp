@@ -16,6 +16,10 @@ class apache2::config {
     ensure => present
   }
 
+  apache2::module {'headers':
+    ensure => present
+  }
+
   file {'apache_env':
     ensure  => present,
     path    => "${apache2::params::enconf}/env.conf",
