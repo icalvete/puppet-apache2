@@ -35,7 +35,8 @@ define apache2::site (
       owner   => 'www-data',
       group   => 'root',
       mode    => '0664',
-      content => template($source)
+      content => template($source),
+      before  => Exec["active_site_$name"]
     }
   }else{
     $site_name = $name
