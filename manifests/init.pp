@@ -2,7 +2,8 @@ class apache2 (
 
   $fmp_host = $apache2::params::fmp_host,
   $fmp_port = $apache2::params::fmp_port,
-  $env      = $apache2::params::env
+  $env      = $apache2::params::env,
+  $timeout  = $apache2::params::timeout
 
 ) inherits apache2::params {
   anchor {'apache2::begin':

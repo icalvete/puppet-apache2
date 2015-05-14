@@ -3,6 +3,7 @@ class apache2::params {
   $fpm_host = '127.0.0.1'
   $fpm_port = '9000'
   $env      = $::environment
+  $timeout  = '60'
 
   case $::osfamily {
 

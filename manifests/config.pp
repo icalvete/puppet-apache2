@@ -70,7 +70,7 @@ class apache2::config {
     lens    => 'Httpd.lns',
     changes => [
       "set /files${apache2::params::config_dir}/apache2.conf/directive[3] Timeout",
-      "set /files${apache2::params::config_dir}/apache2.conf/directive[3]/arg 30",
+      "set /files${apache2::params::config_dir}/apache2.conf/directive[3]/arg ${apache2::params::timeout}",
       "set /files${apache2::params::config_dir}/apache2.conf/directive[4] KeepAlive",
       "set /files${apache2::params::config_dir}/apache2.conf/directive[4]/arg Off",
       "set /files${apache2::params::config_dir}/apache2.conf/directive[5] MaxKeepAliveRequests",
