@@ -6,6 +6,10 @@ class apache2 (
   $timeout  = $apache2::params::timeout
 
 ) inherits apache2::params {
+
+  $apache26_dists = hiera('apache26_dists')
+  $apache26       = member($apache26_dists, $lsbdistcodename)
+
   anchor {'apache2::begin':
     before => Class['apache2::install']
   }
