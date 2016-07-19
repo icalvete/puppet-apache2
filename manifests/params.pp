@@ -15,6 +15,7 @@ class apache2::params {
       $ensites    = "${config_dir}/sites-enabled"
       $avmods     = "${config_dir}/mods-available"
       $avsites    = "${config_dir}/sites-available"
+      $logs_dir   = "/var/log/apache2"
 
       case $::operatingsystemrelease {
 
