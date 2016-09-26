@@ -37,7 +37,7 @@ class apache2::config {
     path   => "${apache2::params::enconf}/combined_sp.conf",
     source => "puppet:///modules/${module_name}/combined_sp.conf",
   }
-  
+
   file {'hardening_sp':
     ensure => present,
     path   => "${apache2::params::enconf}/hardening_sp.conf",
