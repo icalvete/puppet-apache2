@@ -37,7 +37,7 @@ class apache2::config {
     path   => "${apache2::params::enconf}/combined_sp.conf",
     source => "puppet:///modules/${module_name}/combined_sp.conf",
   }
-  
+
   file {'hardening_sp':
     ensure => present,
     path   => "${apache2::params::enconf}/hardening_sp.conf",
@@ -80,13 +80,18 @@ class apache2::config {
     ]
   }
 
-  file {'fpm_config':
-    ensure  => present,
-    path    => "${apache2::params::enconf}/fpm.conf",
-    content => template("${module_name}/fpm.erb"),
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0644',
+  if $apache2::php {
+    file {'fpm_config':
+      ensure  => present,
+      path    => "${apache2::params::enconf}/fpm.conf",
+      content => template("${module_name}/fpm.erb"),
+      owner   => 'root',
+      group   => 'root',
+      mode    => '0644',
+    }
+  }
+
+  if $apache2::hhvm {
   }
 
   if $apache2::params::environment == 'DES' {

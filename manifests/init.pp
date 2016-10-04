@@ -3,7 +3,9 @@ class apache2 (
   $fmp_host = $apache2::params::fmp_host,
   $fmp_port = $apache2::params::fmp_port,
   $env      = $apache2::params::env,
-  $timeout  = $apache2::params::timeout
+  $timeout  = $apache2::params::timeout,
+  $php      = $apache2::params::php,
+  $hhvm     = $apache2::params::hhvm
 
 ) inherits apache2::params {
 

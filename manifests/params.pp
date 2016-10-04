@@ -4,6 +4,8 @@ class apache2::params {
   $fpm_port = '9000'
   $env      = $::environment
   $timeout  = '60'
+  $php      = true
+  $hhvm     = false
 
   case $::osfamily {
 
