@@ -10,7 +10,7 @@ class apache2::params {
   case $::osfamily {
 
     /^Debian$/: {
-      $package    = 'apache2-mpm-worker'
+      $package    = 'apache2'
       $service    = 'apache2'
       $config_dir = '/etc/apache2'
       $enmods     = "${config_dir}/mods-enabled"
