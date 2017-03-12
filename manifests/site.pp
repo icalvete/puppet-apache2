@@ -8,7 +8,7 @@ define apache2::site (
 ) {
   include apache2
 
-  $apache26_dists = hiera('apache26_dists')
+  $apache26_dists = hiera('apache26_dists', ['saucy', 'trusty', 'xenial'])
   $apache26       = member($apache26_dists, $lsbdistcodename)
 
   if $server_alias {

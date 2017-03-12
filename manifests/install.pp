@@ -1,6 +1,6 @@
 class apache2::install {
 
-  package {'apache2-mpm-worker':
+  package {$apache2::params::package:
     ensure => present
   }
 
