@@ -4,10 +4,10 @@ if @fpm_timeout
 end
 -%>
 <IfModule mod_fastcgi.c>
-  AddHandler php5-fcgi .php
-  Action php5-fcgi /php5-fcgi
-  Alias /php5-fcgi /usr/lib/cgi-bin/php5-fcgi
-  FastCgiExternalServer /usr/lib/cgi-bin/php5-fcgi -host <%= scope.lookupvar('apache2::fpm_host') -%>:<%= scope.lookupvar('apache2::fpm_port') -%> -pass-header Authorization <%= idle_timeout -%>
+  AddHandler php-fcgi .php
+  Action php-fcgi /php-fcgi
+  Alias /php-fcgi /usr/lib/cgi-bin/php-fcgi
+  FastCgiExternalServer /usr/lib/cgi-bin/php-fcgi -host <%= scope.lookupvar('apache2::fpm_host') -%>:<%= scope.lookupvar('apache2::fpm_port') -%> -pass-header Authorization <%= idle_timeout -%>
 <% if @apache26 -%>
 
   <Directory />
