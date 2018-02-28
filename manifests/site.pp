@@ -8,14 +8,14 @@ define apache2::site (
 ) {
   include apache2
 
-  $apache26_dists = hiera('apache26_dists', ['saucy', 'trusty', 'xenial'])
-  $apache26       = member($apache26_dists, $lsbdistcodename)
+  $apache26_dists = lookup(
+    'apache26_dists',
+    Array,
+    'first',
+    ['saucy', 'trusty', 'xenial']
+  )
 
-  if $server_alias {
-    if ! is_array($server_alias) {
-      fail('server_alias parameter must be un array')
-    }
-  }
+  $apache26 = member($apache26_dists, $lsbdistcodename)
 
   if $include_from_source {
     include $include_from_source

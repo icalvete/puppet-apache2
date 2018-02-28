@@ -91,8 +91,8 @@ class apache2::config {
     }
   }
 
-  if $apache2::hhvm {
-  }
+  #if $apache2::hhvm {
+  #}
 
   if $apache2::params::environment == 'DES' {
 

@@ -1,7 +1,7 @@
 class apache2 (
 
-  $fmp_host    = $apache2::params::fmp_host,
-  $fmp_port    = $apache2::params::fmp_port,
+  $fpm_host    = $apache2::params::fpm_host,
+  $fpm_port    = $apache2::params::fpm_port,
   $fpm_timeout = undef,
   $env         = pick($environment, $apache2::params::env),
   $timeout     = $apache2::params::timeout,
@@ -10,7 +10,13 @@ class apache2 (
 
 ) inherits apache2::params {
 
-  $apache26_dists = hiera('apache26_dists', ['saucy', 'trusty', 'xenial'])
+  $apache26_dists = lookup(
+    'apache26_dists',
+    Array,
+    'first',
+    ['saucy', 'trusty', 'xenial']
+  )
+
   $apache26       = member($apache26_dists, $lsbdistcodename)
 
   anchor {'apache2::begin':
