@@ -3,10 +3,11 @@ class apache2 (
   $fpm_host    = $apache2::params::fpm_host,
   $fpm_port    = $apache2::params::fpm_port,
   $fpm_timeout = undef,
-  $env         = pick($environment, $apache2::params::env),
+  $env         = pick($::env, $apache2::params::env),
   $timeout     = $apache2::params::timeout,
   $php         = $apache2::params::php,
-  $hhvm        = $apache2::params::hhvm
+  $hhvm        = $apache2::params::hhvm,
+  $instance_id = pick($facts['ec2_metadata']['instance-id'], $facts['ipaddress'])
 
 ) inherits apache2::params {
 

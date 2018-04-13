@@ -94,7 +94,7 @@ class apache2::config {
   #if $apache2::hhvm {
   #}
 
-  if $apache2::params::environment == 'DES' {
+  if $apache2::env == 'DES' {
 
     file {'vagrant_vhost':
       ensure  => present,

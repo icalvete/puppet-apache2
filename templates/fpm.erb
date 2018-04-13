@@ -1,4 +1,8 @@
 <%
+
+@fpm_timeout = scope.lookupvar('apache2::fpm_timeout')
+@apache26    = scope.lookupvar('apache2::apache26')
+
 if @fpm_timeout
   idle_timeout = "-idle-timeout #{@fpm_timeout}"
 end

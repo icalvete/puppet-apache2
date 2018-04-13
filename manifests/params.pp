@@ -2,7 +2,7 @@ class apache2::params {
 
   $fpm_host = '127.0.0.1'
   $fpm_port = '9000'
-  $env      = $::environment
+  $env      = $::env
   $timeout  = '60'
   $php      = true
   $hhvm     = false
