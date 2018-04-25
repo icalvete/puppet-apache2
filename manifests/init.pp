@@ -7,9 +7,14 @@ class apache2 (
   $timeout     = $apache2::params::timeout,
   $php         = $apache2::params::php,
   $hhvm        = $apache2::params::hhvm,
-  $instance_id = pick($facts['ec2_metadata']['instance-id'], $facts['ipaddress'])
 
 ) inherits apache2::params {
+
+  if has_key($facts, 'ec2_metadata') {
+    $instance_id = $facts['ec2_metadata']['instance-id']
+  } else {
+    $instance_id = $facts['ipaddress']
+  }
 
   $apache26_dists = lookup(
     'apache26_dists',
