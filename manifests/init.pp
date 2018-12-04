@@ -20,7 +20,7 @@ class apache2 (
     'apache26_dists',
     Array,
     'first',
-    ['saucy', 'trusty', 'xenial']
+    ['saucy', 'trusty', 'xenial', 'bionic']
   )
 
   $apache26       = member($apache26_dists, $lsbdistcodename)
