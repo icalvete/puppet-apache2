@@ -23,7 +23,7 @@ class apache2 (
     ['saucy', 'trusty', 'xenial', 'bionic']
   )
 
-  $apache26       = member($apache26_dists, $lsbdistcodename)
+  $apache26 = member($apache26_dists, $facts['os']['distro']['codename'])
 
   anchor {'apache2::begin':
     before => Class['apache2::install']
