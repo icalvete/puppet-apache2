@@ -23,7 +23,7 @@ class apache2::config {
   apache2::module {'proxy':
     ensure => present
   }
-  
+
   apache2::module {'proxy_http':
     ensure => present
   }
