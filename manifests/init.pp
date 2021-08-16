@@ -20,10 +20,11 @@ class apache2 (
     'apache26_dists',
     Array,
     'first',
-    ['saucy', 'trusty', 'xenial', 'bionic']
+    ['saucy', 'trusty', 'xenial', 'bionic', 'focal']
   )
 
-  $apache26 = member($apache26_dists, $facts['os']['distro']['codename'])
+  #$apache26 = member($apache26_dists, $facts['os']['distro']['codename'])
+  $apache26 = true
 
   anchor {'apache2::begin':
     before => Class['apache2::install']

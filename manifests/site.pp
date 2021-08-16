@@ -12,10 +12,11 @@ define apache2::site (
     'apache26_dists',
     Array,
     'first',
-    ['saucy', 'trusty', 'xenial']
+    ['saucy', 'trusty', 'xenial', 'bionic', 'focal']
   )
 
-  $apache26 = member($apache26_dists, $lsbdistcodename)
+  #$apache26 = member($apache26_dists, $facts['os']['distro']['codename'])
+  $apache26 = true
 
   if $include_from_source {
     include $include_from_source

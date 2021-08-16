@@ -14,6 +14,14 @@ end
   FastCgiExternalServer /usr/lib/cgi-bin/php-fcgi -host <%= scope.lookupvar('apache2::fpm_host') -%>:<%= scope.lookupvar('apache2::fpm_port') -%> -pass-header Authorization <%= idle_timeout %>
 <% if @apache26 -%>
 
+  <Directory /usr/lib/cgi-bin/php-fcgi>
+    Require all granted
+  </Directory>
+
+  <Directory /usr/lib/cgi-bin>
+    Require all granted
+  </Directory>
+
   <Directory />
     Require all granted
   </Directory>
