@@ -5,7 +5,7 @@ class apache2::install {
   }
 
   case $facts['os']['distro']['codename'] {
-    'bionic': {
+      /^(bionic|focal)/: {
       file {'get_libapache2-mod-fastcgi':
         ensure => present,
         path   => '/tmp/libapache2-mod-fastcgi_2.4.deb',
