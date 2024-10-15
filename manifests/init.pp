@@ -10,11 +10,11 @@ class apache2 (
 
 ) inherits apache2::params {
 
-  if has_key($facts, 'ec2_metadata') {
-    $instance_id = $facts['ec2_metadata']['instance-id']
-  } else {
+  #  if has_key($facts, 'ec2_metadata') {
+  #  $instance_id = $facts['ec2_metadata']['instance-id']
+  #} else {
     $instance_id = $facts['ipaddress']
-  }
+  #}
 
   $apache26_dists = lookup(
     'apache26_dists',
